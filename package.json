@@ -2,6 +2,7 @@
   "name": "elfsight-tz",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -10,9 +11,15 @@
     "@types/node": "^12.20.25",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.18",
+    "bootstrap": "^5.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
     "react-scripts": "4.0.3",
+    "reactstrap": "^8.10.0",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
     "typescript": "^4.4.3",
     "web-vitals": "^1.1.2"
   },
@@ -39,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^6.0.1"
   }
 }

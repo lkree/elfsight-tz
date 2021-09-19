@@ -1,0 +1,61 @@
+$additionalTextColor: #9e9e9e
+$additionalTextSize: 16px
+
+.RIMO__smallCard
+    width: 520px
+    height: 220px
+    background: #3c3e44
+    margin: 0.75rem
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px, rgba(0, 0, 0, 0.06) 0 2px 4px -1px
+    cursor: default
+
+.RIMO__smallCard-photo-wrapper
+    flex: 2 1 0
+
+.RIMO__smallCard-photo
+    opacity: 1
+    transition: opacity 0.5s ease 0s
+    object-position: center
+    object-fit: cover
+
+.RIMO__smallCard-info
+    flex: 3 1 0
+    padding: 0.75rem
+
+.RIMO__smallCard-content-wrapper
+    flex: 1 1 0
+
+.RIMO__smallCard-name
+    font-size: 1.5rem
+    cursor: pointer
+
+    &:focus,
+    &:hover
+        color: #ff9800
+
+
+.RIMO__smallCard-location-info-wrapper,
+.RIMO__smallCard-firstSeries-info
+    color: $additionalTextColor
+    font-size: $additionalTextSize
+
+.RIMO__smallCard-status-icon
+    height: 0.5rem
+    width: 0.5rem
+    margin-right: 0.375rem
+    border-radius: 50%
+
+.RIMO__smallCard-status-icon--Alive
+    background: #55cc44
+
+.RIMO__smallCard-status-icon--Dead
+    background: #d63d2e
+
+.RIMO__smallCard-status-icon--unknown
+    background: #bcbcbc
+
+@media (max-width: 550px)
+    .RIMO__smallCard
+        width: 100%
+        height: unset
+        flex-direction: column

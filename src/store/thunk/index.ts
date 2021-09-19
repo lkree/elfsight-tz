@@ -1,0 +1,1 @@
+export { dispatchThunk } from './utils';
