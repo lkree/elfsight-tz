@@ -11,7 +11,15 @@ export const getCurrentPageNumber = (meta: ILoadMeta): number => {
     return +result[result.length - 1].split('&')[0] + 1;
 }
 
-export const getUrlWithPageNumber = (url: string, pageNumber: string | number) => `${url}?page=${pageNumber}`;
+export const getUrlWithPageNumber = (url: string, pageNumber: string | number) => {
+    if (url.match('page=')) {
+        return url.replace(/page=\d+/, `page=${pageNumber}`);
+    } else if (url.match('\\?')) {
+        return `${url}&page=${pageNumber}`;
+    } else {
+        return `${url}?page=${pageNumber}`;
+    }
+};
 
 export const getUrlWithFilters = (filters: Partial<Record<Filters, { value: string }>> = {}) => {
     const filterNames = Object.keys(filters) as Filters[];

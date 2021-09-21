@@ -1,4 +1,4 @@
-import { CHARACTER_URL, getCurrentPageNumber, getUrlWithPageNumber, ILoadMeta } from '../../../common';
+import { CHARACTER_URL, getUrlWithPageNumber, ILoadMeta } from '../../../common';
 import { actionCreators } from './actionCreators';
 import { TPageType } from './interfaces';
 
@@ -24,16 +24,15 @@ export const downloadData = (
         .then((result) => dispatch(actionSetSuccess(result)))
         .catch(() => actionSetError('something goes wrong'));
 
-
-export const getNextPage = (dispatch: Function, pageType: TPageType, meta: ILoadMeta) => {
+export function getNextPage(dispatch: Function, pageType: TPageType, meta: ILoadMeta): Promise<void> {
     switch (pageType) {
         case 'first':
-            return downloadData(dispatch);
+            return downloadData(dispatch, { url: getUrlWithPageNumber(meta.prev, 1) });
         case 'next':
             return downloadData(dispatch, { url: meta.next });
         case 'last':
-            return downloadData(dispatch, { url: getUrlWithPageNumber(CHARACTER_URL, meta.pages) });
+            return downloadData(dispatch, { url: getUrlWithPageNumber(meta.next, meta.pages) });
         case 'prev':
-            return downloadData(dispatch, { url: getUrlWithPageNumber(CHARACTER_URL, +getCurrentPageNumber(meta) - 1) });
+            return downloadData(dispatch, { url: meta.prev ?? CHARACTER_URL });
     }
 }
