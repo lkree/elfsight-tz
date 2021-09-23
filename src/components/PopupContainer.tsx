@@ -1,6 +1,6 @@
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useActions, useTypedSelector } from '../hooks';
-import { getPopupState } from '../store/selectors';
+import { getPopupState } from '../selectors';
 import { SmallCard } from './SmallCard';
 import { FC } from 'react';
 

@@ -1,8 +1,8 @@
 import { DropdownItem, DropdownMenu, DropdownToggle, InputGroup, InputGroupButtonDropdown } from 'reactstrap';
 import { Filters, TSelectFilter } from '../common';
-import { getFilterState } from '../store/selectors';
+import { FC, useCallback, useState } from 'react';
+import { getFilterState } from '../selectors';
 import { useTypedSelector } from '../hooks';
-import { FC, useState } from 'react';
 
 interface IOptions {
     selectorText: string;
@@ -15,14 +15,15 @@ interface IOptions {
 export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterValues, filterType, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { filters } = useTypedSelector(getFilterState);
-    const toggleDropDown = () => setIsOpen(!isOpen);
+    const onItemClick = useCallback((value, filterType) => onChange?.(value, filterType), [onChange]);
+    const toggleDropDown = useCallback(() => setIsOpen(state => !state), [setIsOpen]);
 
     return (
         <InputGroup className='p-2'>
             <InputGroupButtonDropdown addonType='prepend' isOpen={ isOpen } toggle={ toggleDropDown }>
                 <DropdownToggle caret>{ selectorText }</DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem onClick={ () => onChange?.('', filterType) }>сбросить</DropdownItem>
+                    <DropdownItem onClick={ () => onItemClick('', filterType) }>сбросить</DropdownItem>
                     <DropdownItem divider />
                     {
                         headerText &&
@@ -36,7 +37,7 @@ export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterVal
                         filterValues.options.map((value) => (
                             <DropdownItem key={ value }
                                           disabled={ value === filters?.[filterType]?.value }
-                                          onClick={ () => onChange?.(value, filterType) }>
+                                          onClick={ () => onItemClick(value, filterType) }>
                                 { value }
                             </DropdownItem>
                         ))

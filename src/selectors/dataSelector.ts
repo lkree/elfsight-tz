@@ -1,4 +1,4 @@
-import { RootState } from '../index';
+import { RootState } from '../store';
 
 export const getDataState = ({ dataReducer: { characterData, renderData, meta, processInfo } }: RootState) => ({
     characterData,

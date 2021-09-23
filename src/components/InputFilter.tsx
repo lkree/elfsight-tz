@@ -1,8 +1,8 @@
 import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
-import { ChangeEvent, FC } from 'react';
-import { Filters } from '../common';
+import { ChangeEvent, FC, useCallback } from 'react';
+import { getFilterState } from '../selectors';
 import { useTypedSelector } from '../hooks';
-import { getFilterState } from '../store/selectors';
+import { Filters } from '../common';
 
 interface IOptions {
     onChange?: (value: string, filterType: Filters) => any;
@@ -14,7 +14,7 @@ interface IOptions {
 
 export const InputFilter: FC<IOptions> = ({ onChange, labelText, placeHolderText, className, filterType }) => {
     const { filters } = useTypedSelector(getFilterState);
-    const onFilterChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange?.(value, filterType);
+    const onFilterChange = useCallback(({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange?.(value, filterType), [onChange, filterType]);
 
     return (
         <InputGroup className={ className + ' p-2' }>

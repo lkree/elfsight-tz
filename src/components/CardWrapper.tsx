@@ -1,4 +1,4 @@
-import { getDataState } from '../store/selectors';
+import { getDataState } from '../selectors';
 import { useTypedSelector } from '../hooks';
 import { SmallCard } from './SmallCard';
 import { Spinner } from 'reactstrap';

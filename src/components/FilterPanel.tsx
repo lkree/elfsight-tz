@@ -2,7 +2,7 @@ import { FILTER_TYPES, Filters, getUrlWithFilters, TInputFilter, TSelectFilter }
 import { FC, MouseEventHandler, useCallback, useState } from 'react';
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useActions, useTypedSelector } from '../hooks';
-import { getFilterState } from '../store/selectors';
+import { getFilterState } from '../selectors';
 import { SelectFilter } from './SelectFilter';
 import { InputFilter } from './InputFilter';
 

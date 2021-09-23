@@ -1,8 +1,8 @@
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { useActions, useTypedSelector } from '../hooks';
-import { getDataState } from '../store/selectors';
 import { getCurrentPageNumber } from '../common';
 import { TPageType } from '../store/reducers';
+import { getDataState } from '../selectors';
 import { FC, useCallback } from 'react';
 
 export const PaginationWrapper: FC = () => {

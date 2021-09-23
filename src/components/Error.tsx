@@ -1,4 +1,4 @@
-import { getError } from '../store/selectors';
+import { getError } from '../selectors';
 import { useTypedSelector } from '../hooks';
 import { FC } from 'react';
 
