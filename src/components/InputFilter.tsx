@@ -9,12 +9,12 @@ interface IOptions {
     labelText: string;
     placeHolderText?: string;
     className?: string;
-    filterName: Filters;
+    filterType: Filters;
 }
 
-export const InputFilter: FC<IOptions> = ({ onChange, labelText, placeHolderText, className, filterName }) => {
+export const InputFilter: FC<IOptions> = ({ onChange, labelText, placeHolderText, className, filterType }) => {
     const { filters } = useTypedSelector(getFilterState);
-    const onFilterChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange?.(value, filterName);
+    const onFilterChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange?.(value, filterType);
 
     return (
         <InputGroup className={ className + ' p-2' }>
@@ -22,7 +22,7 @@ export const InputFilter: FC<IOptions> = ({ onChange, labelText, placeHolderText
                 <InputGroupText>{ labelText }</InputGroupText>
             </InputGroupAddon>
 
-            <Input placeholder={ placeHolderText } value={ filters?.[filterName]?.value ?? '' } onChange={ onFilterChange } />
+            <Input placeholder={ placeHolderText } value={ filters?.[filterType]?.value ?? '' } onChange={ onFilterChange } />
         </InputGroup>
     )
 }

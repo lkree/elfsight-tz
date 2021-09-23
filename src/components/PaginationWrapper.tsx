@@ -7,8 +7,11 @@ import { FC, useCallback } from 'react';
 
 export const PaginationWrapper: FC = () => {
     const { processInfo, meta } = useTypedSelector(getDataState);
-    const { getNextPage } = useActions();
-    const getPage = useCallback((pageType: TPageType) => getNextPage(pageType, meta), [meta, getNextPage]);
+    const { getNextPage, setIsLoading } = useActions();
+    const getPage = useCallback((pageType: TPageType) => {
+        setIsLoading(true);
+        getNextPage(pageType, meta);
+    }, [meta, getNextPage, setIsLoading]);
 
     if (processInfo.isLoading || meta?.pages < 2) {
         return <></>;

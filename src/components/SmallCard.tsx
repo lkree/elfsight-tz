@@ -1,6 +1,6 @@
 import { CHARACTER_URL, ICharacter } from '../common';
 import { useActions } from '../hooks';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 import './SmallCard.sass';
 
@@ -14,7 +14,9 @@ export const SmallCard: FC<IOptions> = ({ item, enableNameClick = true }: IOptio
 
     // здесь просто сделал загрузку, потому что могу
     // а вообще, конечно, можно было использовать item, который у нас и так есть
-    const onNameClick = (id: number) => getData({ url: `${CHARACTER_URL}/${id}`, resolve: open });
+    const onNameClick = useCallback((id: number) => {
+        getData({ url: `${CHARACTER_URL}/${id}`, resolve: open });
+    }, [getData, open]);
 
     return (
             <article className='RIMO__smallCard d-flex rounded'>
