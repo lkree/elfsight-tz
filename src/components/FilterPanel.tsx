@@ -1,10 +1,7 @@
 import { FILTER_TYPES, Filters, getUrlWithFilters, TInputFilter, TSelectFilter } from '../common';
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { useActions, useTypedSelector } from '../hooks';
-import { downloadData } from '../store/reducers';
-import { dispatchThunk } from '../store/thunk';
 import { InputFilter } from './InputFilter';
-import { useDispatch } from 'react-redux';
 import { FC, useState } from 'react';
 
 import './FilterPanel.sass';
@@ -14,21 +11,17 @@ import { getFilterState } from '../store/selectors';
 const ICON_SIZE = 24;
 
 export const FilterPanel: FC = () => {
-    const dispatch = useDispatch();
-    const { resetFilters, setFiltered, setChanges } = useActions();
+    const { resetFilters, setFiltered, setChanges, getData } = useActions();
     const { filters, isFiltered, hasChanges } = useTypedSelector(getFilterState);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const onResetClick = () => {
         resetFilters();
-        dispatchThunk<typeof downloadData>({ dispatch, callback: downloadData });
+        getData();
     };
     const onAcceptClick = () => {
         setFiltered(true);
         setIsPanelOpen(false);
-        dispatchThunk<typeof downloadData>(
-            { dispatch, callback: downloadData },
-            { url: getUrlWithFilters(filters) }
-        );
+        getData({ url: getUrlWithFilters(filters) });
     };
     const onPanelIconClick = () => setIsPanelOpen((state) => !state);
     const renderFilters = () => (Object.keys(FILTER_TYPES) as Filters[]).map((filterName) => (

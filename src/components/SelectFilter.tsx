@@ -16,13 +16,6 @@ export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterVal
     const [isOpen, setIsOpen] = useState(false);
     const { filters } = useTypedSelector(getFilterState);
     const toggleDropDown = () => setIsOpen(!isOpen);
-    const renderItems = () => filterValues.options.map((value) => (
-        <DropdownItem key={ value }
-                      disabled={ value === filters?.[filterType]?.value }
-                      onClick={ () => onChange?.(value, filterType) }>
-            { value }
-        </DropdownItem>
-    ));
 
     return (
         <InputGroup className='p-2'>
@@ -39,7 +32,15 @@ export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterVal
                         </>
                     }
 
-                    { renderItems() }
+                    {
+                        filterValues.options.map((value) => (
+                            <DropdownItem key={ value }
+                                          disabled={ value === filters?.[filterType]?.value }
+                                          onClick={ () => onChange?.(value, filterType) }>
+                                { value }
+                            </DropdownItem>
+                        ))
+                    }
                 </DropdownMenu>
             </InputGroupButtonDropdown>
         </InputGroup>

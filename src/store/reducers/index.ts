@@ -29,5 +29,4 @@ export const actionCreators = {
 export interface IState extends IDataState, IPopupState, IFilterState {}
 export type TActions = DataActions & PopupActions & FilterActions;
 
-export { downloadData, getNextPage } from './dataReducer';
 export type { TPageType } from './dataReducer';

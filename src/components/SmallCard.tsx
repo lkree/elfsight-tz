@@ -1,8 +1,4 @@
-import { downloadData } from '../store/reducers';
 import { CHARACTER_URL, ICharacter } from '../common';
-import { dispatchThunk } from '../store/thunk';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
 import { useActions } from '../hooks';
 import { FC } from 'react';
 
@@ -14,21 +10,11 @@ interface IOptions {
 }
 
 export const SmallCard: FC<IOptions> = ({ item, enableNameClick = true }: IOptions) => {
-    const { open } = useActions();
-    const dispatch: AppDispatch = useDispatch();
+    const { open, getData } = useActions();
 
     // здесь просто сделал загрузку, потому что могу
     // а вообще, конечно, можно было использовать item, который у нас и так есть
-    const onNameClick = (id: number) =>
-        dispatchThunk<typeof downloadData>({
-                dispatch,
-                callback: downloadData,
-                setIsLoading: false
-            },
-            {
-                url: `${CHARACTER_URL}/${id}`,
-                actionSetSuccess: open
-            });
+    const onNameClick = (id: number) => getData({ url: `${CHARACTER_URL}/${id}`, resolve: open });
 
     return (
             <article className='RIMO__smallCard d-flex rounded'>
