@@ -27,7 +27,7 @@ export const SmallCard: FC<IOptions> = ({ item, enableNameClick = true }: IOptio
             },
             {
                 url: `${CHARACTER_URL}/${id}`,
-                actionSetSuccess: (data: ICharacter) => open(<SmallCard item={ data } enableNameClick={ false } />)
+                actionSetSuccess: open
             });
 
     return (

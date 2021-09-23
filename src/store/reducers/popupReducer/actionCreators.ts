@@ -2,6 +2,6 @@ import { Open, Close } from './interfaces';
 import { Actions } from './actions';
 
 export const actionCreators = {
-    open: (children: Open['children']): Open => ({ type: Actions.Open, children }),
+    open: (data: Open['data']): Open => ({ type: Actions.Open, data }),
     close: (): Close  => ({ type: Actions.Close }),
 }

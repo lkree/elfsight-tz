@@ -3,8 +3,8 @@ import { Actions } from './actions';
 
 
 export const initialState: IState = {
-    status: 'closed',
-    children: {} as IState['children']
+    isOpened: false,
+    data: {} as IState['data']
 }
 
 export const popupReducer = (state: IState = initialState, action: TActions): IState => {
@@ -13,8 +13,8 @@ export const popupReducer = (state: IState = initialState, action: TActions): IS
             return initialState;
         case Actions.Open:
             return {
-                status: 'opened',
-                children: action.children
+                isOpened: true,
+                data: action.data
             }
         default:
             return { ...state };

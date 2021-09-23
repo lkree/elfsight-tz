@@ -1,3 +1,3 @@
 import { RootState } from '../index';
 
-export const getPopupState = ({ popupReducer: { status, children } }: RootState) => ({ status, children });
+export const getPopupState = ({ popupReducer: { isOpened, data } }: RootState) => ({ isOpened, data });

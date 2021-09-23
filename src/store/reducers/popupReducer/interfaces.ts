@@ -1,21 +1,18 @@
+import { ICharacter } from '../../../common';
 import { Actions } from './actions';
-import { ReactElement } from 'react';
-
-type IStatus = 'opened' | 'closed';
 
 export interface Open {
     type: Actions.Open;
-    children: ReactElement;
+    data: ICharacter;
 }
 
 export interface Close {
     type: Actions.Close;
 }
 
-
 export interface IState {
-    status: IStatus;
-    children: ReactElement;
+    isOpened: boolean;
+    data: ICharacter;
 }
 
 export type TActions = Open | Close;
