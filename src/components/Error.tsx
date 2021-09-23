@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { getError } from '../store/selectors';
 import { useTypedSelector } from '../hooks';
+import { FC } from 'react';
 
 export const ErrorContainer: FC = ({ children }) => {
-    const { dataReducer: { processInfo: { error } } } = useTypedSelector(state => state);
-    if (error) return <div className='text-white'>{ error }</div>
+    const error = useTypedSelector(getError);
 
-    return <>{ children }</>;
+    return error
+            ? <div className='text-white'>{ error }</div>
+            : <>{ children }</>;
 }

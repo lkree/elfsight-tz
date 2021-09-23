@@ -1,13 +1,14 @@
-import { FC } from 'react';
-import { SmallCard } from './SmallCard';
+import { getDataState } from '../store/selectors';
 import { useTypedSelector } from '../hooks';
+import { SmallCard } from './SmallCard';
 import { Spinner } from 'reactstrap';
+import { FC } from 'react';
 
 export const CardWrapper: FC = () => {
-    const { dataReducer } = useTypedSelector(state => state);
-    const generateCards = () => dataReducer.renderData.map((item) => <SmallCard key={ item.id } item={ item } />);
+    const { renderData, processInfo } = useTypedSelector(getDataState);
+    const generateCards = () => renderData.map((item) => <SmallCard key={ item.id } item={ item } />);
 
-    if (dataReducer.processInfo.isLoading) {
+    if (processInfo.isLoading) {
         return <Spinner color='primary' style={{ width: '5vw', height: '5vw' }}> </Spinner>
     }
 

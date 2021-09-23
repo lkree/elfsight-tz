@@ -1,5 +1,6 @@
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { getNextPage, TPageType } from '../store/reducers';
+import { getDataState } from '../store/selectors';
 import { getCurrentPageNumber } from '../common';
 import { dispatchThunk } from '../store/thunk';
 import { useTypedSelector } from '../hooks';
@@ -8,14 +9,14 @@ import { AppDispatch } from '../store';
 import { FC } from 'react';
 
 export const PaginationWrapper: FC = () => {
-    const { dataReducer, dataReducer: { meta } } = useTypedSelector(state => state);
+    const { processInfo, meta } = useTypedSelector(getDataState);
     const dispatch: AppDispatch = useDispatch();
 
-    if (dataReducer.processInfo.isLoading || meta?.pages < 2) {
+    if (processInfo.isLoading || meta?.pages < 2) {
         return <></>;
     }
 
-    const getPage = (pageType: TPageType) => dispatchThunk<typeof getNextPage>({ dispatch, callback: getNextPage }, pageType, dataReducer.meta);
+    const getPage = (pageType: TPageType) => dispatchThunk<typeof getNextPage>({ dispatch, callback: getNextPage }, pageType, meta);
     const currentPage = getCurrentPageNumber(meta);
 
     return (

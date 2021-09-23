@@ -1,5 +1,6 @@
 import { DropdownItem, DropdownMenu, DropdownToggle, InputGroup, InputGroupButtonDropdown } from 'reactstrap';
 import { Filters, TSelectFilter } from '../common';
+import { getFilterState } from '../store/selectors';
 import { useTypedSelector } from '../hooks';
 import { FC, useState } from 'react';
 
@@ -13,7 +14,7 @@ interface IOptions {
 
 export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterValues, filterType, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { filterReducer: { filters } } = useTypedSelector(state => state);
+    const { filters } = useTypedSelector(getFilterState);
     const toggleDropDown = () => setIsOpen(!isOpen);
     const renderItems = () => filterValues.options.map((value) => (
         <DropdownItem key={ value }

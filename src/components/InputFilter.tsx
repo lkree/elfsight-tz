@@ -2,6 +2,7 @@ import { Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { ChangeEvent, FC } from 'react';
 import { Filters } from '../common';
 import { useTypedSelector } from '../hooks';
+import { getFilterState } from '../store/selectors';
 
 interface IOptions {
     onChange?: (value: string, filterType: Filters) => any;
@@ -12,7 +13,7 @@ interface IOptions {
 }
 
 export const InputFilter: FC<IOptions> = ({ onChange, labelText, placeHolderText, className, filterName }) => {
-    const { filterReducer: { filters } } = useTypedSelector(state => state);
+    const { filters } = useTypedSelector(getFilterState);
     const onFilterChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange?.(value, filterName);
 
     return (

@@ -9,15 +9,15 @@ import { FC, useState } from 'react';
 
 import './FilterPanel.sass';
 import { SelectFilter } from './SelectFilter';
+import { getFilterState } from '../store/selectors';
 
 const ICON_SIZE = 24;
 
 export const FilterPanel: FC = () => {
     const dispatch = useDispatch();
-    const { resetFilters, setFiltered } = useActions();
-    const { filterReducer } = useTypedSelector(state => state);
+    const { resetFilters, setFiltered, setChanges } = useActions();
+    const { filters, isFiltered, hasChanges } = useTypedSelector(getFilterState);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const { setChanges } = useActions();
     const onResetClick = () => {
         resetFilters();
         dispatchThunk<typeof downloadData>({ dispatch, callback: downloadData });
@@ -27,7 +27,7 @@ export const FilterPanel: FC = () => {
         setIsPanelOpen(false);
         dispatchThunk<typeof downloadData>(
             { dispatch, callback: downloadData },
-            { url: getUrlWithFilters(filterReducer.filters) }
+            { url: getUrlWithFilters(filters) }
         );
     };
     const onPanelIconClick = () => setIsPanelOpen((state) => !state);
@@ -48,7 +48,7 @@ export const FilterPanel: FC = () => {
     return (
         <div className='RIMO__filterPanel'>
             {
-                filterReducer.isFiltered
+                isFiltered
                     ? <FilledIcon onClick={ onPanelIconClick } />
                     : <EmptyIcon onClick={ onPanelIconClick } />
             }
@@ -56,14 +56,14 @@ export const FilterPanel: FC = () => {
             <Modal isOpen={ isPanelOpen } toggle={ onPanelIconClick }>
                <ModalHeader toggle={ onPanelIconClick } className='position-relative'>
                    Filter Panel
-                   { filterReducer.hasChanges &&
+                   { hasChanges &&
                         <Button className='RIMO__filterPanel-icon'
                                 color='success'
                                 onClick={ onAcceptClick }>
                            Accept
                         </Button>
                    }
-                   { filterReducer.isFiltered &&
+                   { isFiltered &&
                         <Button className='RIMO__filterPanel-resetButton'
                                 color='link'
                                 size='sm'
