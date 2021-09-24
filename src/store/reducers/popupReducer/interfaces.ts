@@ -11,8 +11,7 @@ export interface Close {
 }
 
 export interface IState {
-    isOpened: boolean;
-    data: ICharacter;
+    data?: ICharacter;
 }
 
 export type TActions = Open | Close;

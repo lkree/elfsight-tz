@@ -2,10 +2,7 @@ import { IState, TActions } from './interfaces';
 import { Actions } from './actions';
 
 
-export const initialState: IState = {
-    isOpened: false,
-    data: {} as IState['data']
-}
+export const initialState: IState = {}
 
 export const popupReducer = (state: IState = initialState, action: TActions): IState => {
     switch (action.type) {
@@ -13,7 +10,6 @@ export const popupReducer = (state: IState = initialState, action: TActions): IS
             return initialState;
         case Actions.Open:
             return {
-                isOpened: true,
                 data: action.data
             }
         default:
