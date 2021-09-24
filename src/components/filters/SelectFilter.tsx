@@ -1,8 +1,8 @@
 import { DropdownItem, DropdownMenu, DropdownToggle, InputGroup, InputGroupButtonDropdown } from 'reactstrap';
-import { Filters, TSelectFilter } from '../common';
+import { Filters, TSelectFilter } from '../../common';
 import { FC, useCallback, useState } from 'react';
-import { getFilterState } from '../selectors';
-import { useTypedSelector } from '../hooks';
+import { getFilterState } from '../../selectors';
+import { useTypedSelector } from '../../hooks';
 
 interface IOptions {
     selectorText: string;
@@ -17,11 +17,15 @@ export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterVal
     const { filters } = useTypedSelector(getFilterState);
     const onItemClick = useCallback((value, filterType) => onChange?.(value, filterType), [onChange]);
     const toggleDropDown = useCallback(() => setIsOpen(state => !state), [setIsOpen]);
+    const selectedFilter = filters?.[filterType]?.value;
 
     return (
         <InputGroup className='p-2'>
             <InputGroupButtonDropdown addonType='prepend' isOpen={ isOpen } toggle={ toggleDropDown }>
-                <DropdownToggle caret>{ selectorText }</DropdownToggle>
+                <DropdownToggle color={ selectedFilter ? 'success' : 'secondary' }
+                                caret>
+                    { selectedFilter || selectorText }
+                </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem onClick={ () => onItemClick('', filterType) }>сбросить</DropdownItem>
                     <DropdownItem divider />
@@ -36,7 +40,7 @@ export const SelectFilter: FC<IOptions> = ({ selectorText, headerText, filterVal
                     {
                         filterValues.options.map((value) => (
                             <DropdownItem key={ value }
-                                          disabled={ value === filters?.[filterType]?.value }
+                                          active={ value === selectedFilter }
                                           onClick={ () => onItemClick(value, filterType) }>
                                 { value }
                             </DropdownItem>

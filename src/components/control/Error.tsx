@@ -1,5 +1,5 @@
-import { getError } from '../selectors';
-import { useTypedSelector } from '../hooks';
+import { getError } from '../../selectors';
+import { useTypedSelector } from '../../hooks';
 import { FC } from 'react';
 
 export const ErrorContainer: FC = ({ children }) => {

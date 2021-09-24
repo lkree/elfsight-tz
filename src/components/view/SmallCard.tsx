@@ -1,6 +1,6 @@
-import { CHARACTER_URL, ICharacter } from '../common';
+import { CHARACTER_URL, ICharacter } from '../../common';
 import { FC, useCallback } from 'react';
-import { useActions } from '../hooks';
+import { useActions } from '../../hooks';
 
 import './SmallCard.sass';
 

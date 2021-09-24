@@ -1,5 +1,5 @@
-import { getDataState } from '../selectors';
-import { useTypedSelector } from '../hooks';
+import { getDataState } from '../../selectors';
+import { useTypedSelector } from '../../hooks';
 import { SmallCard } from './SmallCard';
 import { Spinner } from 'reactstrap';
 import { FC } from 'react';

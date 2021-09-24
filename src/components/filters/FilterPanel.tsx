@@ -1,8 +1,8 @@
-import { FILTER_TYPES, Filters, getUrlWithFilters, TInputFilter, TSelectFilter } from '../common';
+import { FILTER_TYPES, Filters, getUrlWithFilters, TInputFilter, TSelectFilter } from '../../common';
 import { FC, MouseEventHandler, useCallback, useState } from 'react';
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { useActions, useTypedSelector } from '../hooks';
-import { getFilterState } from '../selectors';
+import { useActions, useTypedSelector } from '../../hooks';
+import { getFilterState } from '../../selectors';
 import { SelectFilter } from './SelectFilter';
 import { InputFilter } from './InputFilter';
 
