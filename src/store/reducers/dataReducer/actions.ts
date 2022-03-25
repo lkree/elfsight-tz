@@ -1,5 +1,6 @@
 export enum Actions {
     SetData = 'SetData',
     SetError = 'SetError',
-    SetIsLoading = 'SetIsLoading'
+    SetIsLoading = 'SetIsLoading',
+    GetItem = 'GetItem'
 }

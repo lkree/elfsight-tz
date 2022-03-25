@@ -12,6 +12,7 @@ import './App.sass';
 
 export const App: FC = () => {
     const { getData, setIsLoading } = useActions();
+
     useEffect(() => {
         setIsLoading(true);
         getData();

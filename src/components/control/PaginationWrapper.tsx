@@ -1,17 +1,12 @@
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-import { useActions, useTypedSelector } from '../../hooks';
+import { useGetPages, useTypedSelector } from '../../hooks';
 import { getCurrentPageNumber } from '../../common';
-import { TPageType } from '../../store/reducers';
 import { getDataState } from '../../selectors';
-import { FC, useCallback } from 'react';
+import { FC, memo } from 'react';
 
-export const PaginationWrapper: FC = () => {
+export const PaginationWrapper: FC = memo(() => {
     const { processInfo, meta } = useTypedSelector(getDataState);
-    const { getNextPage, setIsLoading } = useActions();
-    const getPage = useCallback((pageType: TPageType) => {
-        setIsLoading(true);
-        getNextPage(pageType, meta);
-    }, [meta, getNextPage, setIsLoading]);
+    const { getNextPage, getLastPage, getFirstPage, getPrevPage } = useGetPages();
 
     if (processInfo.isLoading || meta?.pages < 2) {
         return <></>;
@@ -25,23 +20,23 @@ export const PaginationWrapper: FC = () => {
         <Pagination className='pt-2'>
             <PaginationItem disabled={ isFirstPage }>
                 <PaginationLink href='#'
-                                onClick={ () => getPage('first') }>{ '<<' }</PaginationLink>
+                                onClick={ getFirstPage }>{ '<<' }</PaginationLink>
             </PaginationItem>
             <PaginationItem disabled={ isFirstPage }>
                 <PaginationLink href='#'
-                                onClick={ () => getPage('prev') }>{ '<' }</PaginationLink>
+                                onClick={ getPrevPage }>{ '<' }</PaginationLink>
             </PaginationItem>
             <PaginationItem active>
                 <PaginationLink>{ currentPage }</PaginationLink>
             </PaginationItem>
             <PaginationItem disabled={ isLastPage }>
                 <PaginationLink href='#'
-                                onClick={ () => getPage('next') }>{ '>' }</PaginationLink>
+                                onClick={ getNextPage }>{ '>' }</PaginationLink>
             </PaginationItem>
             <PaginationItem disabled={ isLastPage }>
                 <PaginationLink href='#'
-                                onClick={ () => getPage('last') }>{ '>>' }</PaginationLink>
+                                onClick={ getLastPage }>{ '>>' }</PaginationLink>
             </PaginationItem>
         </Pagination>
     )
-};
+});
